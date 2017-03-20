@@ -1,0 +1,51 @@
+version: '2'
+services:
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222"
+    logging:
+      driver: "none"
+
+  client:
+    build: .
+    image: nats-test/client
+    command: node client.js
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - nats
+    restart: always
+    depends_on:
+      - service-1
+      - service-2
+
+  service-1:
+    build: .
+    image: nats-test/service-1
+    command: node service-1.js
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - nats
+    restart: always
+
+  service-2:
+    build: .
+    image: nats-test/service-2
+    command: node service-2.js
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - nats
+    restart: always
