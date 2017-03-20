@@ -5,7 +5,7 @@ const nats = NATS.connect({
 });
 
 
-nats.requestOne('greeting', {greeting: 'hello'}, {}, 10000, function(response) {
+nats.requestOne('greeting', {greeting: 'hello'}, {}, 1000, function(response) {
 
     console.log('hey!');
     if(response.code && response.code === NATS.REQ_TIMEOUT) {

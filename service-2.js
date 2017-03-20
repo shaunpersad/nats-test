@@ -7,9 +7,7 @@ const nats = NATS.connect({
 nats.subscribe('greeting', {queue:'service'}, function(request, replyTo) {
 
     console.log('service 2', request);
-    setTimeout(function() {
-        nats.publish(replyTo, {
-            response: 'I can help too!'
-        });
-    }, 10000);
+    nats.publish(replyTo, {
+        response: 'I can help too!'
+    });
 });
