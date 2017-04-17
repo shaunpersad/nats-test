@@ -1,4 +1,4 @@
-#nats-test
+# nats-test
 
 This is a small example to show how NATS can be used to communicate with multiple instances of the same service
 in a queue format.  
