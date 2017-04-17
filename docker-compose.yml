@@ -19,7 +19,6 @@ services:
       - /usr/src/app/node_modules
     links:
       - nats
-    restart: always
     depends_on:
       - service-1
       - service-2
